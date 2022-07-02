@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body id="txmBody" onfocus="kaishi()">
+  <div hidden="true"></div>
+  <input id="Button1" type="button" value="开始全屏" onclick="kaishi()" />
+  <input id="Button2" type="button" value="关闭全屏" onclick="guanbi()" />
+
+  <script type="text/javascript">
+    window.onload = function () {
+      setTimeout(function () {
+        document.getElementById("Button1").click();
+      }, 4500);
+    }
+
+    function kaishi() {
+      var docElm = document.documentElement;
+      //W3C   
+      if (docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+      }
+      //FireFox   
+      else if (docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+      }
+      //Chrome等   
+      else if (docElm.webkitRequestFullScreen) {
+        docElm.webkitRequestFullScreen();
+      }
+      //IE11   
+      else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    }
+
+    function guanbi() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+
+    // 自加载代码
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('html页面加载完成');
+      var bt1Text = document.getElementById('Button1').value;
+      console.log(bt1Text);
+
+      // if (bt1Text == "开始全屏") {
+      // document.getElementById('txmBody').blur()
+      // document.getElementById('txmBody').focus();
+      // document.getElementById('txmBody').onfocus();
+      // }
+      console.log('html页面加载完成*2');
+
+    });
+
+    //全屏变换时的事件
+    document.addEventListener("fullscreenchange", function () {
+      fullscreenState.innerHTML = (document.fullscreen) ? "" : "not ";
+    }, false);
+
+    document.addEventListener("mozfullscreenchange", function () {
+      fullscreenState.innerHTML = (document.mozFullScreen) ? "" : "not ";
+    }, false);
+
+    document.addEventListener("webkitfullscreenchange", function () {
+      fullscreenState.innerHTML = (document.webkitIsFullScreen) ? "" : "not ";
+    }, false);
+
+    document.addEventListener("msfullscreenchange", function () {
+      fullscreenState.innerHTML = (document.msFullscreenElement) ? "" : "not ";
+    }, false);
+  </script>
+</body>
+
+</html>
